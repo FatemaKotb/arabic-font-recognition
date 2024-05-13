@@ -1,6 +1,6 @@
 import cv2
 from tqdm import tqdm
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, MiniBatchKMeans
 import numpy as np
 
 def compute_sift_descriptors_to_train_Kmeans(x_data):
@@ -23,10 +23,15 @@ def compute_sift_descriptors_to_train_Kmeans(x_data):
     return sift_descriptors
 
 
-
-def train_kmeans(sift_descriptors):
-    # Initialize the K(Means algorithm
-    kmeans = KMeans(n_clusters=100, random_state=42)
+# Choose between Kmeans and MiniBatchKMeans
+def train_kmeans(sift_descriptors, model_type="MiniBatchKMeans"):
+    
+    if model_type == "MiniBatchKMeans":
+        # Initialize the MiniBatchKMeans algorithm
+        kmeans = MiniBatchKMeans(n_clusters=100, random_state=42, batch_size=1000)
+    else:
+        # Initialize the K(Means algorithm
+        kmeans = KMeans(n_clusters=100, random_state=42)
 
     # Fit the KMeans algorithm on the stacked descriptors
     kmeans.fit(sift_descriptors)
