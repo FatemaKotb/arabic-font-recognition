@@ -26,3 +26,18 @@ A higher `n_init` means the algorithm will run more times, which can lead to bet
 
 So, if speed is more important to you than accuracy, reducing `n_init` will make the algorithm run fewer times, thus speeding up the training process. 
 However, keep in mind that this might result in a less accurate model.
+
+DON'T SHUFFLE WHEN TESTING
+
+
+# Linear Kernel
+clf_linear = svm.SVC(kernel='linear')
+
+# Polynomial Kernel
+clf_poly = svm.SVC(kernel='poly', degree=3)  # degree is a parameter for the polynomial kernel, you can adjust it as needed
+
+# Radial Basis Function (RBF) Kernel
+clf_rbf = svm.SVC(kernel='rbf', gamma='scale')  # gamma is a parameter for the RBF kernel, 'scale' is usually a good default value
+
+# Sigmoid Kernel
+clf_sigmoid = svm.SVC(kernel='sigmoid')

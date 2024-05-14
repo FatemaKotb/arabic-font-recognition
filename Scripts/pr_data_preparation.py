@@ -42,7 +42,7 @@ def preprocess_image(img):
 
 
 # Mimicing the idea of pagination, the following function will preprocess and save the images in batches, given a start index and a batch size
-def preprocess_and_save_images(start_index = 0, batch_size = 1000):
+def preprocess_and_save_images(start_index = 0, batch_size = 750):
     Fonts  = [ 'IBM Plex Sans Arabic', 'Lemonada', 'Marhey','Scheherazade New'] 
 
     # Define the directory where the preprocessed images will be saved
@@ -78,7 +78,7 @@ def preprocess_and_save_images(start_index = 0, batch_size = 1000):
 
 
 
-def load_images(start_index = 0, batch_size = 1000):
+def load_images(start_index = 0, batch_size = 750):
     # Define the directory where the preprocessed images are stored
     base_img_dir = "C:\\Users\\fatom\\Documents\\Pattern Labs\\Group-Project\\arabic-font-recognition\\Images\\preprocessed_images"
 
