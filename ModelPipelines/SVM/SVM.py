@@ -18,7 +18,4 @@ def train_svm(x_date, y_data):
     return clf
 
 def test_svm(clf, x_test, y_test):
-    # Predict the response for test dataset
-    y_pred = clf.predict(x_test)
-
     return clf.score(x_test, y_test)
