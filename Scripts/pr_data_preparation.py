@@ -46,14 +46,14 @@ def preprocess_and_save_images(start_index = 0, batch_size = 750):
     Fonts  = [ 'IBM Plex Sans Arabic', 'Lemonada', 'Marhey','Scheherazade New'] 
 
     # Define the directory where the preprocessed images will be saved
-    base_save_dir = "C:\\Users\\fatom\\Documents\\Pattern Labs\\Group-Project\\arabic-font-recognition\\Images\\preprocessed_images_test"
+    base_save_dir = "preprocessed_images"
 
     # Check if the base directory exists. If it doesn't, create a new directory with that name
     if not os.path.exists(base_save_dir):
         os.makedirs(base_save_dir)
 
     for font in Fonts:
-        font_path = f"C:\\Users\\fatom\\Documents\\Pattern Labs\\Group-Project\\arabic-font-recognition\\Images\\fonts-dataset\\{font}\\*.jpeg"
+        font_path = f"D:\\Downloads\\pattern\\project\\{font}\\*.jpeg"
         # Create a directory for the current font inside the base directory
         font_save_dir = os.path.join(base_save_dir, font)
         if not os.path.exists(font_save_dir):
@@ -80,7 +80,7 @@ def preprocess_and_save_images(start_index = 0, batch_size = 750):
 
 def load_images(start_index = 0, batch_size = 750):
     # Define the directory where the preprocessed images are stored
-    base_img_dir = "C:\\Users\\fatom\\Documents\\Pattern Labs\\Group-Project\\arabic-font-recognition\\Images\\preprocessed_images"
+    base_img_dir = "preprocessed_images"
 
 
     # Retrieve the list of all font directories in the base directory
