@@ -20,7 +20,7 @@ kmeans = load_Kmeans_model()
 clf = load_SVM_model()
 
 # Load the trained scaler
-# scaler = joblib.load('scaler.joblib')
+scaler = joblib.load('scaler.joblib')
 
 # Import FastAPI related modules
 from fastapi import FastAPI, UploadFile, File
@@ -43,8 +43,8 @@ async def test(file : UploadFile = File(...)):
         preprocessed_image = preprocess_image(img).astype('uint8')
         sift_descriptors_Kmeans_test, sift_descriptors_SVM_test = compute_sift_descriptors([preprocessed_image])
         feature_vectors_test = compute_histograms(kmeans, sift_descriptors_SVM_test)
-        # scaled_feature_vectors_test = scaler.transform(feature_vectors_test)
-        prediction = clf.predict(feature_vectors_test)
+        scaled_feature_vectors_test = scaler.transform(feature_vectors_test)
+        prediction = clf.predict(scaled_feature_vectors_test)
         # Calculate the time taken
         time_taken = time.time() - start_time
         return JSONResponse(content={"result":str(prediction[0]), "time_taken": time_taken},status_code=200)
