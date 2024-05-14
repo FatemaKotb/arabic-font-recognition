@@ -1,3 +1,7 @@
+from PIL import Image
+import io
+import numpy as np
+
 import sys
 import time
 from sklearn.externals import joblib
@@ -25,10 +29,26 @@ from fastapi.responses import JSONResponse
 app = FastAPI() 
 
 @app.post("/predict")
-async def predict(img : UploadFile = File(...)):
+# The function takes one argument, file, which is expected to be an uploaded file. 
+# The UploadFile type hint tells FastAPI to expect a file upload in the request. 
+# The File(...) default value tells FastAPI that this field is required.
+
+# UploadFile: This is a class provided by FastAPI to handle uploaded files. 
+# It provides several methods to interact with the uploaded file, 
+# like read(), write(), seek(), and close().
+async def predict(file : UploadFile = File(...)):
     try : 
         # Record the start time
         start_time = time.time()
+
+        # Read the image file
+        image_data = await file.read()
+
+        # Convert the file data to an image
+        image = Image.open(io.BytesIO(image_data))
+
+        # Convert the image to a NumPy array
+        img = np.array(image)
 
         # Preprocess the image
         preprocessed_image = preprocess_image(img)
@@ -48,11 +68,8 @@ async def predict(img : UploadFile = File(...)):
         # Calculate the time taken
         time_taken = time.time() - start_time
 
-        print("Prediction: ", prediction)
-        print("Time taken: ", time_taken)
-
         # Return the prediction and the time taken
-        return JSONResponse( content = {"Prediction": str(prediction[0]) , "Time Taken": time_taken} , status_code=200)
+        return JSONResponse(content={"result":str(prediction[0]), "time_taken": time_taken},status_code=200)
     except Exception as e:
         # Return the error message in case of an exception
         return JSONResponse(content={"error":str(e)},status_code=500)
