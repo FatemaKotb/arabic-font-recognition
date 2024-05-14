@@ -41,10 +41,10 @@ def compute_sift_descriptors(x_data):
         # Check if descriptors is None
         if descriptors is not None:
             # If descriptors is not None, append the descriptors
-            sift_descriptors_to_train_SVM.append(descriptors)
-            
-            # If descriptors is not None, append the descriptors
             sift_descriptors_to_train_Kmeans.extend(descriptors)
+
+            # If descriptors is not None, append the descriptors
+            sift_descriptors_to_train_SVM.append(descriptors)
 
             # If n is None, set n as the number of features in descriptors
             if n is None:
