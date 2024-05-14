@@ -1,0 +1,28 @@
+Speed up KMeans training:
+- Mini-Batch KMeans: 
+  This is a variant of KMeans that uses mini-batches to reduce the computation time. 
+  While the standard KMeans algorithm uses the entire dataset at each iteration, the 
+  MiniBatchKMeans is a variant that uses subsets of the input data to update the cluster centers. 
+  In scikit-learn, you can use the MiniBatchKMeans class.
+
+- Preprocessing: 
+  Preprocessing your data can also speed up training. 
+  This includes scaling your data and removing outliers.
+
+- Reduce Dimensionality: 
+  If your data has a high number of features, you can use dimensionality reduction techniques 
+  like PCA (Principal Component Analysis) to reduce the number of features.
+
+- Increase n_init parameter: 
+  This parameter determines the number of time the k-means algorithm will be run with different centroid seeds. 
+  The final results will be the best output of n_init consecutive runs in terms of inertia. 
+  This could potentially speed up convergence.
+
+
+If you want the training to be quicker and are willing to accept lower accuracy, you should decrease the `n_init` value.
+
+The `n_init` parameter determines the number of times the KMeans algorithm will be run with different centroid seeds. 
+A higher `n_init` means the algorithm will run more times, which can lead to better accuracy but at the cost of longer training time.
+
+So, if speed is more important to you than accuracy, reducing `n_init` will make the algorithm run fewer times, thus speeding up the training process. 
+However, keep in mind that this might result in a less accurate model.
